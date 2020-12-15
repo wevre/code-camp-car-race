@@ -273,7 +273,24 @@ x ; `x` was 12 inside the let form, but still 7 outside.
 ;;; Destructuring
 ;;;
 
+;; When we pass map or vector arguments to a function, we can 'crack open' those
+;; collections right as we specify the parameter name, which cleans up our code.
+;; It also works in let/for/doseq/loop bindings as well -- anywhere we specify
+;; parameters or bindings inside of square brackets, we can emply destructuring.
 
+(let [info {:x 13 :y 14 :rot 45}]
+  (println "The x-coord is" (:x info) "the y coord is" (:y info) 
+           "and the angle is" (:rot info)))
+
+(let [info {:x 13 :y 14 :rot 45}
+      {x :x y :y rot :rot} info] ; <- Destructuring is happening here
+  (println "The x-coord is" x "the y coord is" y 
+           "and the angle is" rot))
+  
+(let [info {:x 13 :y 14 :rot 45}
+      {:keys [x y rot]} info] ; <- Destructuring is happening here
+  (println "The x-coord is" x "the y coord is" y
+           "and the angle is" rot))
 
 ;;;
 ;;; Recursion
