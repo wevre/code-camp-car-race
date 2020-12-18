@@ -8,7 +8,10 @@
   [n i cars]
   (println "Step" i "of" n)
   (doseq [c cars]
-    (print (str (str/join (repeat c "-")) \newline))))
+    (print (str (str/join (repeat (- n c) " ")) 
+                "🚕" 
+                (str/join (repeat c "-")) 
+                \newline))))
 
 (defn rand-inc
   "Maybe increments a value, maybe not."
@@ -27,4 +30,4 @@
       (print-step num-steps i cars))))
 
 (comment
-  (race 3 5))
+  (race 4 5))

@@ -3,9 +3,9 @@
 
 (defn print-state 
   "Prints out the state of the race."
-  [info]
-  (println "Step" (:step info) "of" (:time info))
-  (doseq [c (:cars info)]
+  [{:keys [time step cars]}]
+  (println "Step" step "of" time)
+  (doseq [c cars]
     (print (str (str/join (repeat c "-")) \newline))))
 
 (defn rand-inc
@@ -13,10 +13,18 @@
   [x]
   (if (< (rand) 0.7) (inc x) x))
 
+(comment
+  (rand-inc 10)
+  )
+
 (defn move-cars
   "Moves a vector of cars"
   [cars]
   (mapv rand-inc cars))
+
+(comment
+  (move-cars [1 2 3])
+  )
 
 (defn race
   "Do one step of the race while there is time."

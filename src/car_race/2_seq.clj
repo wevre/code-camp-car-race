@@ -31,7 +31,7 @@
    (cons cars (random-cars (map rand-inc cars)))))
 
 (comment
-  (take 7 (random-cars '(0 0 0))))
+  (take 5 (random-cars '(0 0 0 0 0))))
 
 (defn race 
   "Call with number of cars to race, and number of steps in the race, and off it
@@ -43,8 +43,19 @@
                      (drop 1)               ; skip the first one
                      (take num-steps))]     ; limit to `num-steps`
     (println "Racing" num-cars "cars for" num-steps "steps.")
-    (doseq [step results] ;;<- do some destructuring here
-      (print-step num-steps (first step) (second step)))))
+    (doseq [[i cars] results] ;;<- do some destructuring here
+      (print-step num-steps i cars))))
 
 (comment
-  (race 3 5))
+  (repeat 5 0)
+  (take 5 (random-cars (repeat 5 0)))
+  
+  (map-indexed vector '((0 0 0) (1 1 1) (2 1 2) (3 2 2)))
+  
+  (map vector (range) '((0 0 0) (1 1 1) (2 1 2) (3 2 2)) (range))
+  
+  (map #(vector %1 %2) '("a" "b" "c" "d") '((0 0 0) (1 1 1) (2 1 2) (3 2 2)))
+  
+  (race 3 5)
+  (race 7 200)
+  )
